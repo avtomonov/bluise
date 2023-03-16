@@ -136,7 +136,6 @@ const nuxtConfig: Configuration = {
         ignoreNotFoundWarnings: true,
       },
     ],
-    '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
   ],
 
