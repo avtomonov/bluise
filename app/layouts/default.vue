@@ -1,11 +1,13 @@
 <template>
   <main :class="[$route.name]" class="main px-4 md:px-0">
+    <Map></Map>
+
     <!--
     <div class="container mx-auto">
       <site-header />
     </div>
     -->
-    
+
     <nuxt class="nuxt" />
 
     <!--
@@ -21,11 +23,13 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 import SiteHeader from '@/components/partials/header.vue';
 import SiteFooter from '@/components/partials/footer.vue';
+import Map from '@/components/commons/map.vue';
 
 @Component({
   components: {
     SiteHeader,
     SiteFooter,
+    Map,
   },
 })
 export default class DefaultLayout extends Vue {}

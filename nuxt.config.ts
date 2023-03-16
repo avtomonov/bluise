@@ -36,6 +36,10 @@ const nuxtConfig: Configuration = {
         rel: 'preconnect',
         href: 'https://d33wubrfki0l68.cloudfront.net',
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css',
+      },
     ],
   },
 

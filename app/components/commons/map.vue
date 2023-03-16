@@ -6,9 +6,7 @@
 import { ref } from "vue";
 import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 import constants from "@/constants.js";
-function mapStores () {
 
-}
 // import { mapStores } from "pinia";
 
 export default {
@@ -32,11 +30,7 @@ export default {
 //   },
   async mounted() {
     navigator.geolocation.watchPosition(this.getCurrentPosition);
-    // this.directions = new MapboxDirections({
-    //   accessToken: constants.accessToken,
-    //   unit: 'metric',
-    //   profile:'mapbox/driving'
-    // });
+
     mapboxgl.accessToken = constants.accessToken;
     this.map = new mapboxgl.Map({
       container: "map",
@@ -44,16 +38,16 @@ export default {
       center: [37.6156, 55.7522],
       zoom: 10,
     });
-    // this.map.addControl(new mapboxgl.NavigationControl());
-    // this.map.addControl(
-    //   new mapboxgl.GeolocateControl({
-    //     positionOptions: {
-    //       enableHighAccuracy: true,
-    //     },
-    //     trackUserLocation: true,
-    //     showUserHeading: true,
-    //   })
-    // );
+    this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+      })
+    );
 
     // await this.vehicleStore.loadVehicles(this.$http);
     // this.vehiclesList = this.vehicleStore.vehicleList;
@@ -189,6 +183,5 @@ export default {
     #map {
         height: 100vh;
         width: 100vw;
-        background: #000;
     }
 </style>
