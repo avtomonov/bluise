@@ -28,52 +28,11 @@ export default {
         "_id": {
           "$oid": "640de167a0fc8d4c0c930242"
         },
-        "make": "Футбольный манеж Заря",
-        "model": "Платное",
-        "fuelType": "Исскуственный газон",
-        "modelYear": "10",
-        "registration": "ABC123",
-        "vin": "123ABC456DEF789GHI",
-        "status": "Available",
-        "subscriptionTier": "Premium",
+        "name": "Автомонов Андрей",
         "location": [
-        37.771454,55.808933 
+          37.582107,55.894369
         ],
         "imageUrl": "https://tesla-cdn.thron.com/delivery/public/image/tesla/c82315a6-ac99-464a-a753-c26bc0fb647d/bvlatuR/std/1200x628/lhd-model-3-social",
-        "_class": "com.brk.CarShare.Entities.Vehicle"
-      },{
-        "_id": {
-          "$oid": "640de167a0fc8d4c0c930243"
-        },
-        "make": "Chevrolet",
-        "model": "Bolt",
-        "fuelType": "Electric",
-        "modelYear": "2019",
-        "registration": "DEF456",
-        "vin": "456DEF789GHI123ABC",
-        "status": "Unavailable",
-        "subscriptionTier": "Standard",
-        "location": [
-          43.520164,
-          16.429659
-        ],
-        "_class": "com.brk.CarShare.Entities.Vehicle"
-      },{
-        "_id": {
-          "$oid": "640de167a0fc8d4c0c930244"
-        },
-        "make": "Nissan",
-        "model": "Leaf",
-        "fuelType": "Electric",
-        "modelYear": "2018",
-        "registration": "GHI789",
-        "vin": "789GHI123ABC456DEF",
-        "status": "Available",
-        "subscriptionTier": "Basic",
-        "location": [
-          43.502668,
-          16.475124
-        ],
         "_class": "com.brk.CarShare.Entities.Vehicle"
       }]
     };
@@ -115,15 +74,15 @@ export default {
       );
       let pointFeatures = [];
 
-      this.usersList.forEach((vehicle) => {
+      this.usersList.forEach((user) => {
         pointFeatures.push({
           type: "Feature",
           geometry: {
             type: "Point",
-            coordinates: [vehicle.location[0], vehicle.location[1]],
+            coordinates: [user.location[0], user.location[1]],
           },
           properties: {
-            title: vehicle.make + " " + vehicle.model,
+            title: user.name,
           },
         });
       });
