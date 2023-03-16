@@ -12,10 +12,9 @@ module.exports = {
   extends: [
     'airbnb-typescript/base',
     'plugin:vue-a11y/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:vue/strongly-recommended',
   ],
-  plugins: ['@typescript-eslint', 'vue-a11y', 'vue'],
+  plugins: ['vue-a11y', 'vue'],
   // add your custom rules here
   rules: {
     'import/extensions': [
@@ -27,8 +26,6 @@ module.exports = {
       },
     ],
     'no-console': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-var-requires': 0,
     'import/no-dynamic-require': 0,
     'global-require': 0,
     'no-underscore-dangle': 0,
