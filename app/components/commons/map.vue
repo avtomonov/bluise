@@ -10,21 +10,74 @@ import constants from "@/constants.js";
 // import { mapStores } from "pinia";
 
 export default {
-//   data() {
-//     return {
-//       theme: ref("dark"),
-//       address: null,
-//       currentItemSet: false,
-//       vehicleKey: null,
-//       failSnack: false,
-//       failSnackMsg: "Sorry, something went wrong on our end. Please try again.",
-//       onDirections: false,
-//       map: null,
-//       location: null,
-//       tripActive: false,
-//       directions: null,
-//     };
-//   },
+  data() {
+    return {
+      // theme: ref("dark"),
+      // address: null,
+      // currentItemSet: false,
+      // vehicleKey: null,
+      // failSnack: false,
+      // failSnackMsg: "Sorry, something went wrong on our end. Please try again.",
+      // onDirections: false,
+      // map: null,
+      // location: null,
+      // tripActive: false,
+      // directions: null,
+
+      usersList: [{
+        "_id": {
+          "$oid": "640de167a0fc8d4c0c930242"
+        },
+        "make": "Футбольный манеж Заря",
+        "model": "Платное",
+        "fuelType": "Исскуственный газон",
+        "modelYear": "10",
+        "registration": "ABC123",
+        "vin": "123ABC456DEF789GHI",
+        "status": "Available",
+        "subscriptionTier": "Premium",
+        "location": [
+        37.771454,55.808933 
+        ],
+        "imageUrl": "https://tesla-cdn.thron.com/delivery/public/image/tesla/c82315a6-ac99-464a-a753-c26bc0fb647d/bvlatuR/std/1200x628/lhd-model-3-social",
+        "_class": "com.brk.CarShare.Entities.Vehicle"
+      },{
+        "_id": {
+          "$oid": "640de167a0fc8d4c0c930243"
+        },
+        "make": "Chevrolet",
+        "model": "Bolt",
+        "fuelType": "Electric",
+        "modelYear": "2019",
+        "registration": "DEF456",
+        "vin": "456DEF789GHI123ABC",
+        "status": "Unavailable",
+        "subscriptionTier": "Standard",
+        "location": [
+          43.520164,
+          16.429659
+        ],
+        "_class": "com.brk.CarShare.Entities.Vehicle"
+      },{
+        "_id": {
+          "$oid": "640de167a0fc8d4c0c930244"
+        },
+        "make": "Nissan",
+        "model": "Leaf",
+        "fuelType": "Electric",
+        "modelYear": "2018",
+        "registration": "GHI789",
+        "vin": "789GHI123ABC456DEF",
+        "status": "Available",
+        "subscriptionTier": "Basic",
+        "location": [
+          43.502668,
+          16.475124
+        ],
+        "_class": "com.brk.CarShare.Entities.Vehicle"
+      }]
+    };
+  },
 //   computed: {
 //     ...mapStores({}),
 //   },
@@ -52,50 +105,51 @@ export default {
     // await this.vehicleStore.loadVehicles(this.$http);
     // this.vehiclesList = this.vehicleStore.vehicleList;
 
-    // this.map.on("load", () => {
-    //   this.map.loadImage(
-    //     "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
-    //     (error, image) => {
-    //       if (error) throw error;
-    //       this.map.addImage("custom-marker", image);
-    //     }
-    //   );
-    //   let pointFeatures = [];
-    //   this.vehiclesList.forEach((vehicle) => {
-    //     pointFeatures.push({
-    //       type: "Feature",
-    //       geometry: {
-    //         type: "Point",
-    //         coordinates: [vehicle.location[0], vehicle.location[1]],
-    //       },
-    //       properties: {
-    //         title: vehicle.make + " " + vehicle.model,
-    //       },
-    //     });
-    //   });
+    this.map.on("load", () => {
+      this.map.loadImage(
+        "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+        (error, image) => {
+          if (error) throw error;
+          this.map.addImage("custom-marker", image);
+        }
+      );
+      let pointFeatures = [];
 
-    //   this.map.addSource("points", {
-    //     type: "geojson",
-    //     data: {
-    //       type: "FeatureCollection",
-    //       features: pointFeatures,
-    //     },
-    //   });
+      this.usersList.forEach((vehicle) => {
+        pointFeatures.push({
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [vehicle.location[0], vehicle.location[1]],
+          },
+          properties: {
+            title: vehicle.make + " " + vehicle.model,
+          },
+        });
+      });
 
-    //   this.map.addLayer({
-    //     id: "points",
-    //     type: "symbol",
-    //     source: "points",
-    //     layout: {
-    //       "icon-image": "custom-marker",
-    //       // get the title name from the source's "title" property
-    //       "text-field": ["get", "title"],
-    //       "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-    //       "text-offset": [0, 1.25],
-    //       "text-anchor": "top",
-    //     },
-    //   });
-    // });
+      this.map.addSource("points", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: pointFeatures,
+        },
+      });
+
+      this.map.addLayer({
+        id: "points",
+        type: "symbol",
+        source: "points",
+        layout: {
+          "icon-image": "custom-marker",
+          // get the title name from the source's "title" property
+          "text-field": ["get", "title"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 1.25],
+          "text-anchor": "top",
+        },
+      });
+    });
 
     this.getCurrentPosition();
     // this.vehiclesList.map(async (vehicle) => {
@@ -149,12 +203,12 @@ export default {
     //     this.failSnack = true;
     //   }
     // },
-    // async getAddressFromLocation(location) {
-    //   let response = await this.$http.get(
-    //     `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?access_token=${constants.accessToken}&country=HR`
-    //   );
-    //   return response.data.features[0].place_name;
-    // },
+    async getAddressFromLocation(location) {
+      let response = await this.$http.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?access_token=${constants.accessToken}&country=HR`
+      );
+      return response.data.features[0].place_name;
+    },
     // async endTrip() {
     //   // this.map.removeControl(this.directions);
     //   navigator.geolocation.getCurrentPosition(async (location) => {
