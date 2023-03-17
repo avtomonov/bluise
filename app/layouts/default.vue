@@ -1,6 +1,7 @@
 <template>
   <main :class="[$route.name]" class="main px-4 md:px-0">
     <Map></Map>
+    <AuthForm></AuthForm>
 
     <!--
     <div class="container mx-auto">
@@ -24,12 +25,14 @@ import { Component, Vue } from 'nuxt-property-decorator';
 import SiteHeader from '@/components/partials/header.vue';
 import SiteFooter from '@/components/partials/footer.vue';
 import Map from '@/components/commons/map.vue';
+import AuthForm from '@/components/commons/auth-form.vue';
 
 @Component({
   components: {
     SiteHeader,
     SiteFooter,
     Map,
+    AuthForm
   },
 })
 export default class DefaultLayout extends Vue {}
