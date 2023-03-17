@@ -4,7 +4,7 @@
             <form class="login-form">
                 <p class="mb-4">Вход</p>
                 <input type="email" placeholder="Email"/>
-                <input type="password" placeholder="Пароль"/>
+                <input type="password" value="admin" placeholder="Пароль" readonly/>
                 <button>Войти</button>
                 <p class="message">Нет регистрации? <a href="#" @click="changeForm">Создать аккаунт</a></p>
             </form>
@@ -32,7 +32,7 @@ export default {
         user: {
             name: '',
             email: ''
-        }
+        },
     };
   },
   methods: {
@@ -42,7 +42,6 @@ export default {
     async registerUser () {
         try {
             this.isRegisterLoading = true;
-            console.log(this.name, this.email)
 
             setTimeout(async () => {
 
@@ -56,12 +55,15 @@ export default {
                     }
                 })
 
-                console.log(response.data);
+                this.setRegister();
             }, 1000)
 
         } catch (error) {
             alert('Ошибка');
         }
+    },
+    setRegister() {
+        this.$el.remove();
     }
   },
 };
